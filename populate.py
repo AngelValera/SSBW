@@ -26,6 +26,7 @@ def populate():
 	                     descripcion='Parque de las Ciencias de Granada', likes=0)
 	add_comentario(visita=Visita3, texto="Es muy interesante.")
 	add_comentario(visita=Visita3, texto="El biodomo es lo mejor")
+	add_comentario(visita=Visita3, texto="La exposición que hicieron de rapaces estuvo muy interesante.")
 
 
 	# Print out what we have added to the user.
