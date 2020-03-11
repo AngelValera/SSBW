@@ -33,7 +33,7 @@ def populate():
 	add_comentario(visita=Visita4, texto="Todo genial. Muy relajante y el personal muy atento.")
 	add_comentario(visita=Visita4, texto="Una experiencia inolvidable! Hasta el mínimo detalle.")
 	add_comentario(visita=Visita4, texto="Un buen lugar para desconectar al lado del Paseo de los Tristes. Las instalaciones están muy bien, además, tuvimos suerte que a pesar de ser fin de semana, no estaba masificado. Recomendable elegir la opción del masaje, para salir más relajado. Una sugerencia para mejorar el servicio, podría ser que fuera obligatorio el uso de chancletas para acceder a las piscinas.")
-	
+	add_comentario(visita=Visita4, texto="No me ha gustado hací amucha calor")
 	# Print out what we have added to the user.
 	for v in Visita.objects.all():
 		for c in Comentario.objects.filter(visita=v):
