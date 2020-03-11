@@ -1,0 +1,14 @@
+ {% extends "visitas_granada/base.html" %}
+
+{% if lista_visitas %}
+ <ul>
+     {% for visita in lista_visitas %}
+     <img src="{{ MEDIA_URL }}{{ visita.foto.name}}" width="150px" height="150px">
+     <li>{{ visita.nombre }}</li>
+     <li>{{ visita.descripcion }}</li>
+     <li>{{ visita.likes }}</li>
+     {% endfor %}
+ </ul>
+ {% else %}
+ <p>No visits are available.</p>
+ {% endif %}
