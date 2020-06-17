@@ -38,9 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles',  
+    'visitas_granada.apps.VisitasGranadaConfig',
     'debug_toolbar',
-    'visitas_granada.apps.VisitasGranadaConfig',    
+    'sorl.thumbnail',
+    
+ 
 ]
 
 MIDDLEWARE = [    
