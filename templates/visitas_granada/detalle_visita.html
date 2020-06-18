@@ -22,7 +22,13 @@
 {% block content %}  
 <div class="row">
     <div class="col-lg-3">
-        <h2 class="my-4">Menú lateral</h2>
+        <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
+            <div class="row ">
+                <div class="col-md-12">
+                    <h4 style="margin-top: 10px;" align="center">Menú lateral</h4>
+                </div>
+            </div>
+        </div>
         <div class="list-group">
             {% if lista_visitas %}
             {% for visita in lista_visitas %}
@@ -60,7 +66,7 @@
                         {{ mi_visita.likes }}</small>
                         <button type="button" class="btn btn-primary btn-sm float-right" data_but="btn-xs">
                         <i class='fa fa-thumbs-o-up'></i> Me gusta</button>
-                        
+                        {% if user.is_authenticated %}
                         <a href="{% url 'edit_visita' mi_visita.id %}">
                             <button type="button" class="btn btn-primary btn-sm float-right " data_but="btn-xs"
                                 style="margin-right: 5px;">
@@ -74,7 +80,7 @@
                                 <i class='fa fa-trash'></i>
                                 Eliminar</button>
                         </a>
-
+                        {% endif %}
                     </div>
                 </div>
             </div>

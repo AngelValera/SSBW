@@ -28,6 +28,7 @@ urlpatterns = [
     path('edit_visita/<int:visita_id>/', views.edit_visita, name='edit_visita'),
     path('delete_visit/<int:visita_id>', views.delete_visita, name='delete_visita'),
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

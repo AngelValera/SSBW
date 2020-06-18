@@ -22,8 +22,14 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-lg-3">
-            <h2 class="my-4">Menú lateral</h2>
+        <div class="col-lg-3">            
+            <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
+                <div class="row ">
+                    <div class="col-md-12">
+                        <h4 style="margin-top: 10px;" align="center">Menú lateral</h4>
+                    </div>
+                </div>
+            </div>
             <div class="list-group">
                 {% if lista_visitas %}
                 {% for visita in lista_visitas %}
@@ -38,7 +44,7 @@
                 <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
                     <div class="row ">
                         <div class="col-md-12">
-                            <h4 style="margin-top: 10px;" align="center">Añadir nueva Visita</h4>
+                            <h4 style="margin-top: 10px;" align="center">Editar Visita</h4>
                         </div>
                     </div>
                 </div>
@@ -61,4 +67,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

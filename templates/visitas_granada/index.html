@@ -21,7 +21,13 @@
 {% block content %}
 <div class="row">
     <div class="col-lg-3">
-        <h2 class="my-4">Menú lateral</h2>
+        <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
+            <div class="row ">
+                <div class="col-md-12">
+                    <h4 style="margin-top: 10px;" align="center">Menú lateral</h4>
+                </div>
+            </div>
+        </div>
             <div class="list-group">
                 {% if lista_visitas %}
                     {% for visita in lista_visitas %}
@@ -32,6 +38,24 @@
     </div><!-- /.col-lg-3 -->
     <div class="col-lg-9">
         <div class="row">            
+            {% if user.is_authenticated %}
+            <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
+                <div class="row ">
+                    <div class="col-md-12">
+                        <h4 style="margin-top: 10px;" align="center">Usuario {{user.username}}</h4>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
+                <div class="row ">
+                    <div class="col-md-12">
+                        <h4 style="margin-top: 10px;" align="center">No ha sido autentificado</h4>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
             {% if messages %}
                 {% for message in messages %}                    
                     <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert">
