@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import socket
-
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'visitas_granada.apps.VisitasGranadaConfig',
     'debug_toolbar',
     'sorl.thumbnail',
+    'crispy_forms',
     
  
 ]
@@ -141,4 +142,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
 INTERNAL_IPS = [ip[:-1] + '1' for ip in ips] + ['127.0.0.1', '10.0.2.2']
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}

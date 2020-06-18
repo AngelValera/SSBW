@@ -31,7 +31,18 @@
             </div>
     </div><!-- /.col-lg-3 -->
     <div class="col-lg-9">
-        <div class="row">
+        <div class="row">            
+            {% if messages %}
+                {% for message in messages %}                    
+                    <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <strong>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}{{ message.tags|title }}{% endif %}!</strong>
+                        {{ message }}
+                    </div>
+                {% endfor %}                                
+            {% endif %}
+
             {% if lista_visitas %}
                 {% for visita in lista_visitas %}
                     <div class="card mb-3" style="width: 100%;">
@@ -53,8 +64,7 @@
                                  <div class="card-footer">
                                     <small class="text-muted"><i class='fa fa-heart' style="color: red;"></i> {{ visita.likes }}</small>
                                     <button type="button" class="btn btn-primary btn-sm float-right"
-                                        data_but="btn-xs">
-                                        <i class='fa fa-thumbs-o-up'></i> Me gusta</button>
+                                        data_but="btn-xs"><i class='fa fa-thumbs-o-up'></i> Me gusta</button>
                                  </div>                                 
                             </div>
                         </div>

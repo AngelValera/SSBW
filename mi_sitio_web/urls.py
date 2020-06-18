@@ -23,8 +23,10 @@ from visitas_granada import views
 
 urlpatterns = [        
     path('', views.index, name='index'),
-    path('<int:visita_id>/', views.detalle_visita, name='detalle'),
-    path('listado/', views.listado, name='listado'),
+    path('visita/<int:visita_id>/', views.detalle_visita, name='detalle'),
+    path('add_visita/', views.add_visita, name='add_visita'),
+    path('edit_visita/<int:visita_id>/', views.edit_visita, name='edit_visita'),
+    path('delete_visit/<int:visita_id>', views.delete_visita, name='delete_visita'),
     path('admin/', admin.site.urls),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,7 +2,6 @@
 {% load static %}
 {% load thumbnail %}
 
-
 {%block totalVisitas%}
     {% if num_visitas %}
         {{ num_visitas }}
@@ -61,6 +60,21 @@
                         {{ mi_visita.likes }}</small>
                         <button type="button" class="btn btn-primary btn-sm float-right" data_but="btn-xs">
                         <i class='fa fa-thumbs-o-up'></i> Me gusta</button>
+                        
+                        <a href="{% url 'edit_visita' mi_visita.id %}">
+                            <button type="button" class="btn btn-primary btn-sm float-right " data_but="btn-xs"
+                                style="margin-right: 5px;">
+                                <i class="fa fa-pencil"></i>
+                                Editar</button>
+                        </a>
+
+                        <a href="{% url 'delete_visita' mi_visita.id %}">
+                            <button type="button" class="btn btn-danger btn-sm float-right " data_but="btn-xs"
+                                style="margin-right: 5px;">
+                                <i class='fa fa-trash'></i>
+                                Eliminar</button>
+                        </a>
+
                     </div>
                 </div>
             </div>

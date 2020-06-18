@@ -46,12 +46,12 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'listado' %}">Inicio
+                        <a class="nav-link" href="{% url 'index' %}">Inicio
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Identificarse</a>
+                        <a class="nav-link" href="{% url 'add_visita' %}">Añadir Visita</a>
                     </li>                    
                 </ul>
             </div>
@@ -63,7 +63,7 @@
     <!-- Header -->
     <div class="jumbotron jumbo_img">
         <div class="container">     
-            <img src="../media/fotos/ugr.png" style="height: auto;" width="150px" height="150px">
+            <img src="{{ MEDIA_URL }}fotos/ugr.png" style="height: auto;" width="150px" height="150px">
             <div class="row">
                 <div class="col-lg-2 linDatos font-weight-bold">
                     <p>{%block totalVisitas%}{%endblock%}</p>
@@ -81,7 +81,7 @@
     {% endblock %}
     <!-- --------------------------------------------------------------------------- -->
     <!-- Page Content -->
-    <div class="container">
+    <div class="container">        
         {% block content %}
 
         {% endblock %}        
