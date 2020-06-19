@@ -30,7 +30,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.35.3/js/bootstrap-dialog.min.js"></script>
-    <!--<script src="{% static "js/funciones.js" %}"></script>-->
+    <script src="{% static "js/funciones.js" %}"></script>
     <!-- --------------------------------------------------------------------------- -->
     <title>Visitas Granada</title>
 </head>
@@ -114,57 +114,15 @@
     {% block footer %}
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+            <p class="m-0 text-center text-white">Copyright &copy; Visitas Granada  2020</p>
+            <p class="m-0 text-center text-white">Ángel Valera Motos</p>
+            <p class="m-0 text-center text-white">Máster de Ingeniería Informática</p>
+            <p class="m-0 text-center text-white">Sistemas Software Basados en Web</p>            
         </div><!-- /.container -->
     </footer> <!-- Footer -->
     {% endblock %}
     <!-- --------------------------------------------------------------------------- -->
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            var dark = false;
-
-            //--------------- Modo lectura -----------------------------
-            $("#tipolectura").css('cursor', 'pointer');
-            $("#tipolectura").on('click', function (e) {
-                //$(this).find('i').toggleClass('fa-sun-o')
-                if (!dark) {
-                    $(this).find("i").removeClass("fa-moon-o").addClass("fa-sun-o");
-                    document.body.setAttribute("data-theme", "dark");
-                    $("[id*=visita_card]").each(function () {
-                        $(this).addClass("bg-light");
-                    });
-                    $(".list-group-item").each(function () {
-                        $(this).addClass("bg-light");
-                    });
-                    dark = true;
-                } else {
-                    $(this).find("i").removeClass("fa-sun-o").addClass("fa-moon-o");
-                    document.body.removeAttribute("data-theme");
-                    $("[id*=visita_card]").each(function () {
-                        $(this).removeClass("bg-light");
-                    });
-                    $(".list-group-item").each(function () {
-                        $(this).addClass("bg-light");
-                    });
-                    dark = false;
-                }
-            });
-            /*
-            $("[id*=btn_Like]").on('click', function (e) {
-                alert("like");
-            });
-
-            $("[id*=btn_Dislike]").on('click', function (e) {
-                alert("Dislike");
-            });
-            */
-        });
-    </script>
+    <!-- Optional JavaScript -->    
 </body>
 
 </html>

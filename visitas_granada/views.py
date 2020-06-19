@@ -126,7 +126,6 @@ class ComentarioViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-
 @csrf_exempt
 def get_likes(request, visita_id):
     try:
