@@ -188,7 +188,7 @@ LOGGING = {
             'propagate': True,
             'level': 'ERROR',
         },
-        'visits_granada': {
+        'visitas_granada': {
             'handlers': ['file', 'console'],
             'level': 'DEBUG',
         },

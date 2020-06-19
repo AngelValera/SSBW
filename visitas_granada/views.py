@@ -14,11 +14,13 @@ from visitas_granada.permisions import IsOwnerOrReadOnly
 from django.views.decorators.csrf import csrf_exempt
 import os
 import json
+import logging
+logger = logging.getLogger(__name__)
 
 
 # Leave the rest of the views (detail, results, vote) unchanged
 def index(request):
-    lista_visitas = Visita.objects.order_by('nombre')
+    lista_visitas = Visita.objects.order_by('-likes')
     num_comentarios = Comentario.objects.all().count()
     num_visitas = Visita.objects.all().count()
     template = loader.get_template('visitas_granada/index.html')
@@ -43,7 +45,7 @@ def detalle_visita(request, visita_id):
         'comentarios': comentarios,
         'num_comentarios': num_comentarios,
         'num_visitas': num_visitas,
-    }
+    }    
     return HttpResponse(template.render(context, request))
 
 
@@ -57,8 +59,11 @@ def add_visita(request):
     if request.method == 'POST':  # de vuelta con los datos
         form = VisitaForm(request.POST, request.FILES)  # bound the form
         if form.is_valid():
-            form.save()
+            post = form.save(commit=False)
+            post.owner = request.user
+            post.save()
             messages.success(request, "Nueva visita creada correctamente")
+            logger.info("Nueva visita creada correctamente")
             return redirect('index')    
     template = loader.get_template('visitas_granada/add_visita.html')
     context = {
@@ -76,16 +81,18 @@ def edit_visita(request, visita_id):
     lista_visitas = Visita.objects.order_by('nombre')
     num_comentarios = Comentario.objects.all().count()
     num_visitas = Visita.objects.all().count()
-    visit = Visita.objects.get(pk=visita_id)    
+    visit = Visita.objects.get(pk=visita_id)  
+    name = visit.nombre
     form = VisitaForm(instance=visit)    
-
     if request.method == 'POST':  # de vuelta con los datos
         form = VisitaForm(request.POST, request.FILES,
                           initial=visit.__dict__, instance=visit)  # bound the form
         if form.is_valid():
-            if form.has_changed():
+            if form.has_changed():                
                 form.save()
-            messages.success(request, "Visita modificada correctamente")
+            msg = "Visita "+name+" ha sido modificada correctamente"
+            messages.success(request, msg )
+            logger.info("Visita con id %s  ha sido modificada correctamente", visita_id)
             return redirect('index')
     template = loader.get_template('visitas_granada/edit_visita.html')
     context = {
@@ -102,8 +109,11 @@ def edit_visita(request, visita_id):
 @staff_member_required
 def delete_visita(request, visita_id):
     visit = Visita.objects.get(pk=visita_id)
+    name = visit.nombre
     visit.delete()
-    messages.success(request, "Visita eliminada correctamente")
+    msg = "Visita "+name+" ha sido eliminada correctamente"
+    messages.success(request, msg)
+    logger.info("Visita con id %s  ha sido eliminada correctamente", visita_id)
     return redirect('index')
 
 
@@ -123,14 +133,12 @@ class ComentarioViewSet(viewsets.ModelViewSet):
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
-
 @csrf_exempt
 def get_likes(request, visita_id):
     try:
         visita = Visita.objects.get(id=visita_id)
-    except Visita.DoesNotExist:
+    except Visita.DoesNotExist:        
+        logger.error("Error al obtener los likes de una visita que no existe: ")
         return HttpResponse(status=404)
     if request.method == 'GET':
         serializer = LikesSerializer(visita)
