@@ -39,7 +39,8 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('api_visitas/', include(router_visita.urls)),
     path('api_visitas/', include(router_commentario.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api_visitas/likes/<int:visita_id>/', views.get_likes, name='likes'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

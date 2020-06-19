@@ -3,19 +3,19 @@
 {% load thumbnail %}
 
 {%block totalVisitas%}
-    {% if num_visitas %}
-        {{ num_visitas }}
-    {% else %}
-        0
-    {% endif %}
+{% if num_visitas %}
+{{ num_visitas }}
+{% else %}
+0
+{% endif %}
 {%endblock%}
 
 {%block totalComentarios%}
-    {% if num_comentarios %}
-        {{ num_comentarios }}
-    {% else %}
-        0
-    {% endif %}
+{% if num_comentarios %}
+{{ num_comentarios }}
+{% else %}
+0
+{% endif %}
 {%endblock%}
 
 {% block content %}
@@ -28,16 +28,16 @@
                 </div>
             </div>
         </div>
-            <div class="list-group">
-                {% if lista_visitas %}
-                    {% for visita in lista_visitas %}
-                    <a href="{% url 'detalle' visita.id %}" class="list-group-item">{{ visita.nombre }}</a>
-                    {% endfor %}
-                {% endif %}
-            </div>
+        <div id="menu_lateral" class="list-group">
+            {% if lista_visitas %}
+            {% for visita in lista_visitas %}
+            <a href="{% url 'detalle' visita.id %}" class="list-group-item">{{ visita.nombre }}</a>
+            {% endfor %}
+            {% endif %}
+        </div>
     </div><!-- /.col-lg-3 -->
     <div class="col-lg-9">
-        <div class="row">            
+        <div class="row">
             {% if user.is_authenticated %}
             <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
                 <div class="row ">
@@ -55,53 +55,52 @@
                 </div>
             </div>
             {% endif %}
-            
+
             {% if messages %}
-                {% for message in messages %}                    
-                    <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <strong>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}{{ message.tags|title }}{% endif %}!</strong>
-                        {{ message }}
-                    </div>
-                {% endfor %}                                
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <strong>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}{{ message.tags|title }}{% endif %}!</strong>
+                {{ message }}
+            </div>
+            {% endfor %}
             {% endif %}
 
             {% if lista_visitas %}
-                {% for visita in lista_visitas %}
-                    <div class="card mb-3" style="width: 100%;">
-                        <div class="row no-gutters">
-                            <div class="col-md-4">                                
-                                {% thumbnail visita.foto "720x1024" as im %}
-                                <a href="{% url 'detalle' visita.id %}"><img src="{{ MEDIA_URL }}{{ im.name}}"
-                                        class="card-img"
-                                    alt="{{ im.name }}" width="250px" height="180px"></a>
-                                {% endthumbnail %}
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body" style="height: 130px;">
-                                     <h4 class="card-title">
-                                         <a href="{% url 'detalle' visita.id %}">{{ visita.nombre }}</a>
-                                     </h4>                                    
-                                    <p class="card-text" align="justify">{{ visita.descripcion }}</p>
-                                </div>
-                                 <div class="card-footer">
-                                    <small class="text-muted"><i class='fa fa-heart' style="color: red;"></i> {{ visita.likes }}</small>
-                                    <button type="button"
-                                        class="btn btn-primary btn-sm float-right"
-                                        data_but="btn-xs">
-                                        <i class='fa fa-thumbs-o-down'></i> No me gusta</button>
-                                    <button type="button"
-                                        class="btn btn-primary btn-sm float-right"
-                                        data_but="btn-xs" style="margin-right: 5px;">
-                                        <i class='fa fa-thumbs-o-up'></i> Me gusta</button>
-                                 </div>                                 
-                            </div>
+            {% for visita in lista_visitas %}
+            <div id="visita_card{{visita.id}}" class="card mb-3" style="width: 100%;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        {% thumbnail visita.foto "720x1024" as im %}
+                        <a href="{% url 'detalle' visita.id %}"><img src="{{ MEDIA_URL }}{{ im.name}}" class="card-img"
+                                alt="{{ im.name }}" width="250px" height="180px"></a>
+                        {% endthumbnail %}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body" style="height: 130px;">
+                            <h4 class="card-title">
+                                <a href="{% url 'detalle' visita.id %}">{{ visita.nombre }}</a>
+                            </h4>
+                            <p class="card-text" align="justify">{{ visita.descripcion }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted"><i class='fa fa-heart' style="color: red;"></i>
+                                <label  id="num_likes">{{ visita.likes }}</label>
+                            </small>
+                            <a href="{% url 'detalle' visita.id %}">
+                                <button type="button"
+                                    class="btn btn-primary btn-sm float-right"
+                                    data_but="btn-xs">
+                                <i class='fa fa fa-search-plus'></i> Ver en Detalle</button></a>
                         </div>
                     </div>
-                {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
             {% endif %}
         </div><!-- /.row -->
-    </div><!-- /.col-lg-9 -->       
+    </div><!-- /.col-lg-9 -->
 </div><!-- /.row -->
 {% endblock %}
+

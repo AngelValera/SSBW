@@ -8,9 +8,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.admin.views.decorators import staff_member_required
 from rest_framework import viewsets, permissions
-from visitas_granada.serializers import ComentarioSerializer, VisitaSerializer
+from visitas_granada.serializers import ComentarioSerializer, VisitaSerializer, LikesSerializer
 from rest_framework.parsers import JSONParser
 from visitas_granada.permisions import IsOwnerOrReadOnly
+from django.views.decorators.csrf import csrf_exempt
 import os
 import json
 
@@ -124,3 +125,21 @@ class ComentarioViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+
+@csrf_exempt
+def get_likes(request, visita_id):
+    try:
+        visita = Visita.objects.get(id=visita_id)
+    except Visita.DoesNotExist:
+        return HttpResponse(status=404)
+    if request.method == 'GET':
+        serializer = LikesSerializer(visita)
+        return JsonResponse(serializer.data)
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = LikesSerializer(visita, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)

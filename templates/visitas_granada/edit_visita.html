@@ -5,69 +5,69 @@
 
 
 {%block totalVisitas%}
-    {% if num_visitas %}
-        {{ num_visitas }}
-    {% else %}
-        0
-    {% endif %}
+{% if num_visitas %}
+{{ num_visitas }}
+{% else %}
+0
+{% endif %}
 {%endblock%}
 
 {%block totalComentarios%}
-    {% if num_comentarios %}
-        {{ num_comentarios }}
-    {% else %}
-        0
-    {% endif %}
+{% if num_comentarios %}
+{{ num_comentarios }}
+{% else %}
+0
+{% endif %}
 {%endblock%}
 
 {% block content %}
-    <div class="row">
-        <div class="col-lg-3">            
+<div class="row">
+    <div class="col-lg-3">
+        <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
+            <div class="row ">
+                <div class="col-md-12">
+                    <h4 style="margin-top: 10px;" align="center">Menú lateral</h4>
+                </div>
+            </div>
+        </div>
+        <div class="list-group">
+            {% if lista_visitas %}
+            {% for visita in lista_visitas %}
+            <a href="{% url 'detalle' visita.id %}" class="list-group-item">{{ visita.nombre }}</a>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div><!-- /.col-lg-3 -->
+    <!-- DETALLE DE LA VISITA -->
+    <div class="col-lg-9">
+        <div class="row">
             <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
                 <div class="row ">
                     <div class="col-md-12">
-                        <h4 style="margin-top: 10px;" align="center">Menú lateral</h4>
+                        <h4 style="margin-top: 10px;" align="center">Editar Visita</h4>
                     </div>
                 </div>
             </div>
-            <div class="list-group">
-                {% if lista_visitas %}
-                {% for visita in lista_visitas %}
-                <a href="{% url 'detalle' visita.id %}" class="list-group-item">{{ visita.nombre }}</a>
-                {% endfor %}
-                {% endif %}
-            </div>
-        </div><!-- /.col-lg-3 -->
-        <!-- DETALLE DE LA VISITA -->
-        <div class="col-lg-9">
-            <div class="row">
-                <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
-                    <div class="row ">
-                        <div class="col-md-12">
-                            <h4 style="margin-top: 10px;" align="center">Editar Visita</h4>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="card mb-3" style="width: 100%;">
-                    <div class="row ">
-                        <div class="col-md-12 center_div">
-                            <form id="edit_visita" action="{% url 'edit_visita' visit.id %}" method="post"
-                                enctype="multipart/form-data" style="margin: 20px;">
-                                {% csrf_token %}
-                                {{ form|crispy }}
-                                <a href="{% url 'index' %}">
-                                    <button type="button" class="btn btn-danger float-right " data_but="btn-xs"
-                                        style="margin-bottom: 10px;"><i class='fa fa-remove'></i> Cancelar</button>
-                                </a>
-                                <button type="submit" class="btn btn-primary float-right " data_but="btn-xs"
-                                    style="margin-right: 5px;margin-bottom: 10px;"><i class='fa fa-floppy-o'></i>
-                                    Guardar</button>
-                            </form>
-                        </div>
+            <div id="visita_card_edit" class="card mb-3" style="width: 100%;">
+                <div class="row ">
+                    <div class="col-md-12 center_div">
+                        <form id="edit_visita" action="{% url 'edit_visita' visit.id %}" method="post"
+                            enctype="multipart/form-data" style="margin: 20px;">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <a href="{% url 'index' %}">
+                                <button type="button" class="btn btn-danger float-right " data_but="btn-xs"
+                                    style="margin-bottom: 10px;"><i class='fa fa-remove'></i> Cancelar</button>
+                            </a>
+                            <button type="submit" class="btn btn-primary float-right " data_but="btn-xs"
+                                style="margin-right: 5px;margin-bottom: 10px;"><i class='fa fa-floppy-o'></i>
+                                Guardar</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

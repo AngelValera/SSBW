@@ -3,23 +3,22 @@
 {% load thumbnail %}
 
 {%block totalVisitas%}
-    {% if num_visitas %}
-        {{ num_visitas }}
-    {% else %}
-        0
-    {% endif %}
+{% if num_visitas %}
+{{ num_visitas }}
+{% else %}
+0
+{% endif %}
 {%endblock%}
 
 {%block totalComentarios%}
-    {% if num_comentarios %}
-        {{ num_comentarios }}
-    {% else %}
-        0
-    {% endif %}
+{% if num_comentarios %}
+{{ num_comentarios }}
+{% else %}
+0
+{% endif %}
 {%endblock%}
 
-
-{% block content %}  
+{% block content %}
 <div class="row">
     <div class="col-lg-3">
         <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
@@ -40,65 +39,68 @@
     <!-- DETALLE DE LA VISITA -->
     <div class="col-lg-9">
         <div class="row">
-        <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
-            <div class="row ">
-                <div class="col-md-12">
-                    <h4 style="margin-top: 10px;" align="center">Detalle</h4>
+            <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
+                <div class="row ">
+                    <div class="col-md-12">
+                        <h4 style="margin-top: 10px;" align="center">Detalle</h4>
+                    </div>
                 </div>
             </div>
-        </div>
-        {% if mi_visita %}             
-        <div class="card mb-3" style="width: 100%;">
-            <div class="row no-gutters">
-                <div class="col-md-4">
-                    {% thumbnail mi_visita.foto "720x1024" as im %}
-                        <img src="{{ MEDIA_URL }}{{ im.name}}" class="card-img" alt="{{ im.name }}" 
-                        width="250px" height="250px">
-                    {% endthumbnail %}
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body" style="height: 200px;">
-                        <h4 class="card-title">{{ mi_visita.nombre }}</h4>
-                        <p class="card-text" align="justify">{{ mi_visita.descripcion }}</p>
+            {% if mi_visita %}            
+            <div id="visita_card" class="card mb-3" style="width: 100%;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        {% thumbnail mi_visita.foto "720x1024" as im %}
+                        <img src="{{ MEDIA_URL }}{{ im.name}}" class="card-img" alt="{{ im.name }}" width="250px"
+                            height="250px">
+                        {% endthumbnail %}
                     </div>
-                    <div class="card-footer">
-                        <small class="text-muted"><i class='fa fa-heart' style="color: red;"></i>
-                        {{ mi_visita.likes }}</small>
-                        <button type="button" class="btn btn-primary btn-sm float-right" data_but="btn-xs">
-                            <i class='fa fa-thumbs-o-down'></i> No me gusta</button>
-                        <button type="button" class="btn btn-primary btn-sm float-right" data_but="btn-xs"
-                            style="margin-right: 5px;">
-                        <i class='fa fa-thumbs-o-up'></i> Me gusta</button>
-                        {% if user.is_authenticated and user.is_staff %}
-                        <a href="{% url 'edit_visita' mi_visita.id %}">
-                            <button type="button" class="btn btn-primary btn-sm float-right " data_but="btn-xs"
-                                style="margin-right: 5px;">
-                                <i class="fa fa-pencil"></i>
-                                Editar</button>
-                        </a>
+                    <div class="col-md-8">
+                        <div class="card-body" style="height: 200px;">
+                            <h4 class="card-title">{{ mi_visita.nombre }}</h4>
+                            <p class="card-text" align="justify">{{ mi_visita.descripcion }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted"><i class='fa fa-heart' style="color: red;"></i>
+                                <label id="num_likes">{{ mi_visita.likes }}</label>
+                            </small>
+                            {% if user.is_authenticated and user.is_staff %}
+                            <a href="{% url 'edit_visita' mi_visita.id %}">
+                                <button type="button" class="btn btn-primary btn-sm float-right " data_but="btn-xs">
+                                    <i class="fa fa-pencil"></i>
+                                    Editar</button>
+                            </a>
 
-                        <a href="{% url 'delete_visita' mi_visita.id %}">
-                            <button type="button" class="btn btn-danger btn-sm float-right " data_but="btn-xs"
-                                style="margin-right: 5px;">
-                                <i class='fa fa-trash'></i>
-                                Eliminar</button>
-                        </a>
-                        {% endif %}
+                            <a href="{% url 'delete_visita' mi_visita.id %}">
+                                <button type="button" class="btn btn-danger btn-sm float-right " data_but="btn-xs"
+                                    style="margin-right: 5px;">
+                                    <i class='fa fa-trash'></i>
+                                    Eliminar</button>
+                            </a>
+                            {% endif %}
+                            <button id="btn_Dislike" type="button" class="btn btn-secondary btn-sm float-right"
+                                style="margin-right: 5px;"
+                                data_but="btn-xs">
+                                <i class='fa fa-thumbs-o-down'></i> No me gusta</button>
+                            <button id="btn_Like" type="button" class="btn btn-secondary btn-sm float-right"
+                                style="margin-right: 5px;"
+                                data_but="btn-xs" style="margin-right: 5px;">
+                                <i class='fa fa-thumbs-o-up'></i> Me gusta</button>                            
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        {% endif %}
-        <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
-            <div class="row ">                
-                <div class="col-md-12">                                        
-                    <h4 style="margin-top: 10px;" align="center">Comentarios</h4>                    
+            {% endif %}
+            <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
+                <div class="row ">
+                    <div class="col-md-12">
+                        <h4 style="margin-top: 10px;" align="center">Comentarios</h4>
+                    </div>
                 </div>
             </div>
-        </div>
-        {% if comentarios %}
+            {% if comentarios %}
             {% for comentario in comentarios %}
-            <div class="card mb-3" style="width: 100%;">
+            <div id="visita_card_comentario" class="card mb-3" style="width: 100%;">
                 <div class="row no-gutters">
                     <div class="col-sd-1">
                     </div>
@@ -110,8 +112,32 @@
                 </div>
             </div>
             {% endfor %}
-        {% endif %}
+            {% endif %}
         </div><!-- /.row -->
-    </div><!-- /.col-lg-9 -->    
+    </div><!-- /.col-lg-9 -->
 </div><!-- /.row -->
+
+<script>
+    $(document).ready(function () {
+        var visita;
+        var likes_bd = "{{ mi_visita.likes }}";
+        likes = Number(likes_bd);
+        console.log(likes)
+        var liketotal = document.getElementById('num_likes');
+        liketotal.innerHTML = likes;
+        $("#btn_Like, #btn_Dislike").css('cursor', 'pointer');
+        $("#btn_Like").on('click', function (e) {
+            likes += 1;
+            liketotal.innerHTML = likes;
+            //send_value(likes);
+        });
+        $("#btn_Dislike").on('click', function (e) {
+            likes -= 1;
+            liketotal.innerHTML = likes;
+            //send_value(likes);
+        });
+    });
+</script>
+
 {% endblock %}
+

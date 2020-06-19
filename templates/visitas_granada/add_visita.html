@@ -4,19 +4,19 @@
 {% load crispy_forms_tags %}
 
 {%block totalVisitas%}
-    {% if num_visitas %}
-        {{ num_visitas }}
-    {% else %}
-        0
-    {% endif %}
+{% if num_visitas %}
+{{ num_visitas }}
+{% else %}
+0
+{% endif %}
 {%endblock%}
 
 {%block totalComentarios%}
-    {% if num_comentarios %}
-        {{ num_comentarios }}
-    {% else %}
-        0
-    {% endif %}
+{% if num_comentarios %}
+{{ num_comentarios }}
+{% else %}
+0
+{% endif %}
 {%endblock%}
 
 {% block content %}
@@ -48,22 +48,22 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="card mb-3" style="width: 100%;">
+
+            <div id="visita_card_add" class="card mb-3" style="width: 100%;">
                 <div class="row ">
                     <div class="col-md-12 center_div">
                         <form id="add_visita" action="{% url 'add_visita' %}" method="post"
                             enctype="multipart/form-data" style="margin: 20px;">
 
                             {% csrf_token %}
-                            {{ form|crispy }}                            
+                            {{ form|crispy }}
                             <a href="{% url 'index' %}">
-                            <button type="button" class="btn btn-danger float-right " data_but="btn-xs"
-                                style="margin-bottom: 10px;"><i class='fa fa-remove'></i> Cancelar</button>
+                                <button type="button" class="btn btn-danger float-right " data_but="btn-xs"
+                                    style="margin-bottom: 10px;"><i class='fa fa-remove'></i> Cancelar</button>
                             </a>
                             <button type="submit" class="btn btn-primary float-right " data_but="btn-xs"
-                                style="margin-right: 5px;margin-bottom: 10px;"><i
-                                    class='fa fa-floppy-o'></i> Guardar</button>
+                                style="margin-right: 5px;margin-bottom: 10px;"><i class='fa fa-floppy-o'></i>
+                                Guardar</button>
                         </form>
                     </div>
                 </div>
