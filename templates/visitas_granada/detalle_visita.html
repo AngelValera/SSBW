@@ -65,8 +65,11 @@
                         <small class="text-muted"><i class='fa fa-heart' style="color: red;"></i>
                         {{ mi_visita.likes }}</small>
                         <button type="button" class="btn btn-primary btn-sm float-right" data_but="btn-xs">
+                            <i class='fa fa-thumbs-o-down'></i> No me gusta</button>
+                        <button type="button" class="btn btn-primary btn-sm float-right" data_but="btn-xs"
+                            style="margin-right: 5px;">
                         <i class='fa fa-thumbs-o-up'></i> Me gusta</button>
-                        {% if user.is_authenticated %}
+                        {% if user.is_authenticated and user.is_staff %}
                         <a href="{% url 'edit_visita' mi_visita.id %}">
                             <button type="button" class="btn btn-primary btn-sm float-right " data_but="btn-xs"
                                 style="margin-right: 5px;">

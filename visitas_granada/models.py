@@ -5,7 +5,8 @@ from sorl.thumbnail import ImageField
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
-
+from django.core.validators import RegexValidator, FileExtensionValidator
+from django.contrib.auth import get_user_model
 
 def validate_capitalized(value):
 	if value != value.capitalize():
@@ -19,8 +20,10 @@ class Visita(models.Model):
 	descripcion = models.CharField(
 	    	max_length=1000, validators=[validate_capitalized])
 	likes       = models.IntegerField(default=0)	
-	foto = ImageField(upload_to='fotos', blank=True)
-	
+	foto = ImageField(upload_to='fotos', blank=True, validators=[FileExtensionValidator( allowed_extensions=['jpg', 'png'])])	
+	owner = models.ForeignKey('auth.User', related_name='visita',
+	                          on_delete=models.CASCADE)
+
 	def save(self, *args, **kwargs):    		
 		super(Visita, self).save(*args, **kwargs)
 

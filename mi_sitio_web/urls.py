@@ -20,6 +20,14 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 from visitas_granada import views
+from rest_framework import routers
+
+router_visita = routers.DefaultRouter()
+router_visita.register(r'visitas', views.VisitaViewSet)
+
+router_commentario = routers.DefaultRouter()
+router_commentario.register(r'comentarios', views.ComentarioViewSet)
+
 
 urlpatterns = [        
     path('', views.index, name='index'),
@@ -29,7 +37,9 @@ urlpatterns = [
     path('delete_visit/<int:visita_id>', views.delete_visita, name='delete_visita'),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    
+    path('api_visitas/', include(router_visita.urls)),
+    path('api_visitas/', include(router_commentario.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

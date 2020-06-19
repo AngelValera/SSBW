@@ -5,7 +5,15 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from visitas_granada.models import Visita, Comentario, VisitaForm
 from django.template import loader
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.admin.views.decorators import staff_member_required
+from rest_framework import viewsets, permissions
+from visitas_granada.serializers import ComentarioSerializer, VisitaSerializer
+from rest_framework.parsers import JSONParser
+from visitas_granada.permisions import IsOwnerOrReadOnly
 import os
+import json
+
 
 # Leave the rest of the views (detail, results, vote) unchanged
 def index(request):
@@ -38,6 +46,8 @@ def detalle_visita(request, visita_id):
     return HttpResponse(template.render(context, request))
 
 
+@login_required
+@staff_member_required
 def add_visita(request): 
     lista_visitas = Visita.objects.order_by('nombre')
     num_comentarios = Comentario.objects.all().count()
@@ -58,6 +68,9 @@ def add_visita(request):
     }
     return HttpResponse(template.render(context, request))
 
+
+@login_required
+@staff_member_required
 def edit_visita(request, visita_id):
     lista_visitas = Visita.objects.order_by('nombre')
     num_comentarios = Comentario.objects.all().count()
@@ -84,6 +97,8 @@ def edit_visita(request, visita_id):
     return HttpResponse(template.render(context, request))
 
 
+@login_required
+@staff_member_required
 def delete_visita(request, visita_id):
     visit = Visita.objects.get(pk=visita_id)
     visit.delete()
@@ -91,4 +106,21 @@ def delete_visita(request, visita_id):
     return redirect('index')
 
 
-# Leave the rest of the views (detail, results, vote) unchanged
+class VisitaViewSet(viewsets.ModelViewSet):
+    queryset = Visita.objects.all().order_by('id')
+    serializer_class = VisitaSerializer
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+class ComentarioViewSet(viewsets.ModelViewSet):
+    queryset = Comentario.objects.all().order_by('id')
+    serializer_class = ComentarioSerializer
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
