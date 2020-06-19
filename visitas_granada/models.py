@@ -44,7 +44,7 @@ class Comentario(models.Model):
 
 class VisitaForm(forms.ModelForm):
     class Meta:
-        model = Visita
+        model = Visita		
         fields = ['nombre', 'descripcion', 'foto']
         widgets = {
             'nombre': forms.TextInput(attrs={'size': 40}),

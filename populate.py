@@ -16,7 +16,7 @@ def populate():
                       descripcion='Catedral de granada', likes=0 )
 	add_comentario(visita=Visita1, texto="Una catedral muy bonita")
 	add_comentario(visita=Visita1, texto="No me parece para tanto")
-	add_comentario(visita=Visita1, texto="La catedral más bonita que e visto")
+	add_comentario(visita=Visita1, texto="La catedral más bonita que he visto")
 	
 	Visita2 = add_Visita(nombre='Alhambra', 
                       descripcion='Alhambra de granada', likes=0 )
