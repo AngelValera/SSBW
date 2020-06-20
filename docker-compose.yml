@@ -1,10 +1,19 @@
-version: '3'
+version: '3.5'
 
 services:  
-  web:
-    build: .
+  app_django:
+    build: ./django_app
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/code
+      - ./django_app/:/code
     ports:
       - "8000:8000"
+  
+  app_react:
+    image: node:12-alpine    
+    volumes:
+      - ./react_app:/code      
+    working_dir: /code
+    ports:
+      - "3000:3000"
+    command: npm start 
