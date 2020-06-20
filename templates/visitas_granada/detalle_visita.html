@@ -20,6 +20,7 @@
 
 {% block content %}
 <div class="row">
+    <!------------------------------------------------------------------------------------------------->
     <div class="col-lg-3">
         <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
             <div class="row ">
@@ -36,7 +37,8 @@
             {% endif %}
         </div>
     </div><!-- /.col-lg-3 -->
-    <!-- DETALLE DE LA VISITA -->
+    <!------------------------------------------------------------------------------------------------->
+    <!-- Detalle de la visita -->
     <div class="col-lg-9">
         <div class="row">
             <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
@@ -49,13 +51,13 @@
             {% if mi_visita %}
             <div id="visita_card" class="card mb-3" style="width: 100%;">
                 <div class="row no-gutters">
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         {% thumbnail mi_visita.foto "720x1024" as im %}
                         <img src="{{ MEDIA_URL }}{{ im.name}}" class="card-img" alt="{{ im.name }}" width="250px"
                             height="250px">
                         {% endthumbnail %}
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         <div class="card-body" style="height: 200px;">
                             <h4 class="card-title">{{ mi_visita.nombre }}</h4>
                             <p class="card-text" align="justify">{{ mi_visita.descripcion }}</p>
@@ -89,6 +91,25 @@
                 </div>
             </div>
             {% endif %}
+            <!------------------------------------------------------------------------------------------------->
+            <!-- Mapa con la ubicación -->
+            <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
+                <div class="row ">
+                    <div class="col-md-12">
+                        <h4 style="margin-top: 10px;" align="center">Ubicación</h4>
+                    </div>
+                </div>
+            </div>            
+            <div id="visita_card_mapa" class="card mb-3" style="width: 100%;">
+                <div class="row no-gutters">
+                    <div id="ubi_map" class="card-body" style="height: 300px;" >
+                    <!--Mapa-->    
+                    </div>                    
+                </div>
+            </div>
+            <!------------------------------------------------------------------------------------------------->
+            <!--Comentarios la ubicación -->            
+            {% if comentarios %}
             <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
                 <div class="row ">
                     <div class="col-md-12">
@@ -96,7 +117,6 @@
                     </div>
                 </div>
             </div>
-            {% if comentarios %}
             {% for comentario in comentarios %}
             <div id="visita_card_comentario" class="card mb-3" style="width: 100%;">
                 <div class="row no-gutters">
@@ -111,6 +131,7 @@
             </div>
             {% endfor %}
             {% endif %}
+            <!------------------------------------------------------------------------------------------------->
         </div><!-- /.row -->
     </div><!-- /.col-lg-9 -->
 </div><!-- /.row -->
@@ -120,7 +141,29 @@
         var visita;
         var num_likes = "{{ mi_visita.likes }}";
         likes = Number(num_likes);
-        //console.log(likes)
+
+        //---------------- Incluimos mapa con la ubicación dela visita ---------------
+        var lat = "{{lat}}";
+        var lon = "{{lon}}";
+        var map = L.map('ubi_map').setView([lat, lon], 16);
+        //console.log(map)
+
+        // Se añaden las capas de OpenStreetMap
+        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+            maxZoom: 19,
+            minZoom: 2,
+        }).addTo(map);
+
+        // Se añade un control de escala
+        L.control.scale().addTo(map);
+        //Se añade el marcador en la latitud y longitud de la visita
+        L.marker([lat, lon], {
+            draggable: false
+        }).addTo(map);
+
+        //--------------------------------------------------------------
+
         var liketotal = document.getElementById('num_likes');
         liketotal.innerHTML = likes;
         $("#btn_Like, #btn_Dislike").css('cursor', 'pointer');
@@ -132,7 +175,7 @@
         $("#btn_Dislike").on('click', function (e) {
             likes -= 1;
             //liketotal.innerHTML = likes;  // Tarea 7
-            send_value(likes);  // Tarea 8            
+            send_value(likes); // Tarea 8            
         });
 
         // realizamos la modificación de los likes usando el API 
@@ -156,6 +199,10 @@
         }
 
     });
+</script>
+
+<script>
+
 </script>
 
 {% endblock %}

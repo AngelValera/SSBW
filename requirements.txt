@@ -6,3 +6,5 @@ sorl-thumbnail
 django-crispy-forms
 django-messages-to-bootstrap-notify==0.2.6
 djangorestframework==3.11.0
+requests
+python-decouple

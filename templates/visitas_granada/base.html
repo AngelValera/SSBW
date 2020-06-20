@@ -30,6 +30,13 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.35.3/js/bootstrap-dialog.min.js"></script>
+    <!-- Libreria Leaflet para maps-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
     <script src="{% static "js/funciones.js" %}"></script>
     <!-- --------------------------------------------------------------------------- -->
     <title>Visitas Granada</title>
@@ -56,7 +63,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li>
-                        <span class="nav-link" id="tipolectura"> <i class="fa fa-moon-o" aria-hidden="true"></i></span>
+                        <span class="nav-link" id="tipolectura"><i id="dark_mode" class="fa fa-moon-o" aria-hidden="true"></i></span>
                     </li>
                     {% if user.is_authenticated %}
                     {% if user.is_staff %}
@@ -69,7 +76,7 @@
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Login <i class="fa fa-sign-in"></i></a>
+                        <a class="nav-link" href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Login</a>
                     </li>
                     {% endif %}
                 </ul>

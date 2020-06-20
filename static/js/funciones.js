@@ -1,11 +1,10 @@
-
 // modo nocturno
-$(document).ready(function () {    
+$(document).ready(function () {
     var dark = false;
     //--------------- Modo nocturno -----------------------------
     $("#tipolectura").css('cursor', 'pointer');
-    $("#tipolectura").on('click', function (e) {        
-        if (!dark) {
+    $("#tipolectura").on('click', function (e) {
+        if (!dark) {            
             $(this).find("i").removeClass("fa-moon-o").addClass("fa-sun-o");
             document.body.setAttribute("data-theme", "dark");
             $("[id*=visita_card]").each(function () {
