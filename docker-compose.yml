@@ -12,7 +12,7 @@ services:
   app_react:
     image: node:12-alpine    
     volumes:
-      - ./react_app:/code      
+      - ./react_app:/code:cached     
     working_dir: /code
     ports:
       - "3000:3000"
