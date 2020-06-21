@@ -1,0 +1,23 @@
+.jumbotron {
+    padding-top: 70px;
+}
+
+
+.jumbo_img {
+    background-image: url("https://cdn.civitatis.com/images/masks/mask-b.png");
+    background-size: cover;
+    padding-bottom: 0rem;
+}
+
+.cabDatos {
+    font-size: large;
+    text-align: left;
+    height: 40px;
+
+}
+
+.linDatos {
+    font-size: xx-large;
+    text-align: left;
+    height: 40px;
+}

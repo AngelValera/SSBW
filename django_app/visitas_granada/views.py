@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 # Leave the rest of the views (detail, results, vote) unchanged
 def index(request):
-    lista_visitas = Visita.objects.order_by('-likes')
+    lista_visitas = Visita.objects.order_by('-likes')[:6]
     num_comentarios = Comentario.objects.all().count()
     num_visitas = Visita.objects.all().count()
     template = loader.get_template('visitas_granada/index.html')
