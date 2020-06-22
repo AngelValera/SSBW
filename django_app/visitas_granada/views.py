@@ -186,24 +186,29 @@ def get_likes(request, visita_id):
 
 
 def notify_bot(level, notify):
-    telegram_token = config('TOKEN')
-    telegram_chat_id = config('ID')
-    dt = datetime.datetime.utcnow().strftime('%d-%m-%Y %H:%M:%S')   
-    msg = "<i>{datetime}</i><pre>\n{notify}</pre>".format(notify=notify, datetime=dt)    
-    # Almacenamos también el mensaje en el fichero de log
-    if level == 'error':
-        logger.error(notify)
-    elif level == 'warning':
-        logger.warning(notify)
-    else:
-        logger.info(notify)
+    try:
+        telegram_token = config('TOKEN')
+        telegram_chat_id = config('ID')
+        dt = datetime.datetime.utcnow().strftime('%d-%m-%Y %H:%M:%S')   
+        msg = "<i>{datetime}</i><pre>\n{notify}</pre>".format(notify=notify, datetime=dt)    
+        # Almacenamos también el mensaje en el fichero de log
+        if level == 'error':
+            logger.error(notify)
+        elif level == 'warning':
+            logger.warning(notify)
+        else:
+            logger.info(notify)
 
-    if telegram_token != "None" and telegram_chat_id != "None":
-        payload = {
-            'chat_id': telegram_chat_id,
-            'text': msg,
-            'parse_mode': 'HTML'
-        }
-        result = requests.post("https://api.telegram.org/bot{token}/sendMessage".format(
-            token=telegram_token),
-            data=payload).content
+        if telegram_token != "None" and telegram_chat_id != "None":
+            payload = {
+                'chat_id': telegram_chat_id,
+                'text': msg,
+                'parse_mode': 'HTML'
+            }
+            result = requests.post("https://api.telegram.org/bot{token}/sendMessage".format(
+                token=telegram_token),
+                data=payload).content
+    except:
+        pass      
+
+    
