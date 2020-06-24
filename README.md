@@ -22,7 +22,7 @@ También se ha incluido Nginx para el servicio de los directorios static y media
 
 Es importante que el nombre que se haya dado al superusuario sea **"admin"** para que el script populate funcione correctamente
 
-1.  `docker-compose up run app_django python ./django_app/populate.py`
+1.  `docker-compose run app_django python ./django_app/populate.py`
 
 Si tenemos un bot de telegram y queremos que la aplicación de django nos envíe las notificaciones a este bot, debemos crear un fichero en el directorio /django_app llamado **".env"** de la siguiente manera:
 
