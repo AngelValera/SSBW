@@ -15,13 +15,13 @@ class Cabecera extends React.Component {
 
     componentWillMount() {
         axios
-            .get("http://localhost:8000/api_visitas/visitas/")
+            .get("http://localhost/api_visitas/visitas/")
             .then(res => this.setState({
                 visitas: res.data
             }))
             .catch(err => console.log(err));
         axios
-            .get("http://localhost:8000/api_visitas/comentarios/")
+            .get("http://localhost/api_visitas/comentarios/")
             .then(res => this.setState({
                 comentarios: res.data
             }))

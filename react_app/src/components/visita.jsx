@@ -17,7 +17,7 @@ class Visita extends React.Component {
 
     refresh = () => {        
         axios
-            .get("http://localhost:8000/api_visitas/visitas/" + this.props.match.params.id +"/")
+            .get("http://localhost/api_visitas/visitas/" + this.props.match.params.id +"/")
             .then(res => this.setState({
                 visita: res.data,
                 likes: res.data.likes                
@@ -27,7 +27,7 @@ class Visita extends React.Component {
 
     sumar_Like(){
         var ilikes = this.state.likes + 1;
-        fetch('http://localhost:8000/api_visitas/likes/' + this.state.visita.id + '/', {
+        fetch('http://localhost/api_visitas/likes/' + this.state.visita.id + '/', {
             method: 'PUT',
             body: JSON.stringify({
                 "id": this.state.visita.id,
@@ -44,7 +44,7 @@ class Visita extends React.Component {
 
     restar_Like(){
         var ilikes = this.state.likes - 1;
-        fetch('http://localhost:8000/api_visitas/likes/' + this.state.visita.id + '/', {
+        fetch('http://localhost/api_visitas/likes/' + this.state.visita.id + '/', {
             method: 'PUT',
             body: JSON.stringify({
                 "id": this.state.visita.id,

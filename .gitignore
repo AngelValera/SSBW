@@ -130,6 +130,16 @@ dmypy.json
 
 ./vscode
 
+# images 
+/django_app/media/
+/django_app/static/admin
+/django_app/static/debug_toolbar
+/django_app/static/rest_framework
+
+
+# ------------------------------------------------------------
+# React 
+# ------------------------------------------------------------
 # dependencies
 /react_app/node_modules
 /react_app/.pnp

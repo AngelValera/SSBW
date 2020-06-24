@@ -28,8 +28,9 @@ class App extends Component {
     }
 
     refresh = () => {
+      // debug:true -> http://localhost:8000/api_visitas/visitas/
       axios
-        .get("http://localhost:8000/api_visitas/visitas/")
+        .get("http://localhost/api_visitas/visitas/")
         .then(res => this.setState({
           visitas: res.data
         }))

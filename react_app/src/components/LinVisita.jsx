@@ -30,7 +30,7 @@ class LinVisita extends React.Component {
             <div class="row no-gutters" style={estiloEstirar}>
                 <div class="col-md-5" >
                     <img src={this.props.foto} class="card-img" alt="" width="250px" height="180px">
-                    </img>
+                    </img>                    
                 </div>
                 <div class="col-md-7">
                     <div class="card-body" style={cardheight}>
