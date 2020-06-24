@@ -28,6 +28,11 @@ Si tenemos un bot de telegram y queremos que la aplicación de django nos envíe
 
     TOKEN= {Nuestro token del bot de telegram}
     ID= {nuestro id de telegram}
+
+Para instalar la aplicación de React debemos ejecutar el siguiente comando:
+
+1.  `docker-compose up run app_react npm install`
+
 1. `docker-compose up `
   
 ## Para acceder a las aplicaciones:

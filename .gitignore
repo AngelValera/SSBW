@@ -141,7 +141,7 @@ dmypy.json
 # React 
 # ------------------------------------------------------------
 # dependencies
-#/react_app/node_modules
+/react_app/node_modules
 /react_app/.pnp
 .pnp.js
 
