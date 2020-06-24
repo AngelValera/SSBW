@@ -29,8 +29,8 @@
             </div>
         </div>
         <div id="menu_lateral" class="list-group">
-            {% if lista_visitas %}
-            {% for visita in lista_visitas %}
+            {% if visitasCompletas %}
+            {% for visita in visitasCompletas %}
             <a href="{% url 'detalle' visita.id %}" class="list-group-item">{{ visita.nombre }}</a>
             {% endfor %}
             {% endif %}
@@ -86,13 +86,11 @@
                         </div>
                         <div class="card-footer">
                             <small class="text-muted"><i class='fa fa-heart' style="color: red;"></i>
-                                <label  id="num_likes">{{ visita.likes }}</label>
+                                <label id="num_likes">{{ visita.likes }}</label>
                             </small>
                             <a href="{% url 'detalle' visita.id %}">
-                                <button type="button"
-                                    class="btn btn-primary btn-sm float-right"
-                                    data_but="btn-xs">
-                                <i class='fa fa fa-search-plus'></i> Ver en Detalle</button></a>
+                                <button type="button" class="btn btn-primary btn-sm float-right" data_but="btn-xs">
+                                    <i class='fa fa fa-search-plus'></i> Ver en Detalle</button></a>
                         </div>
                     </div>
                 </div>
@@ -103,4 +101,3 @@
     </div><!-- /.col-lg-9 -->
 </div><!-- /.row -->
 {% endblock %}
-

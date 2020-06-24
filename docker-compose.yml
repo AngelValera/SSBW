@@ -2,16 +2,27 @@ version: '3'
 
 services:  
   app_django:
-    build: ./django_app
-    restart: always
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - ./django_app/:/code
-    ports:
+    build: . 
+    ports: 
       - "8000:8000"
+    volumes:
+      - ./django_app/static:/code/static            # para los archivos static
+      - ./django_app/media:/code/media  # para los archivos media
+      - ./:/code                        # para los archivos de la api    
+
+  nginx:
+    image: nginx:alpine    
+    ports:
+      - 80:80
+    volumes:
+      - ./config/nginx/conf.d/:/etc/nginx/conf.d    # dir para archivo configuración de nginx 
+      - ./django_app/static:/code/static                         # para los archivos static
+      - ./django_app/media:/code/media              # para los archivos media     
+    depends_on:
+      - app_django
   
   app_react:
-    image: node:12-alpine    
+    image: node:12-alpine       
     volumes:
       - ./react_app:/code:cached     
     working_dir: /code
@@ -19,15 +30,7 @@ services:
       - "3000:3000"
     command: npm start 
     tty: true
+    
   
-  nginx:
-    image: nginx:alpine
-    ports:
-      - 80:80
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro      # dir para archivo configuración de nginx :read only
-      - ./django_app/static:/var/www/static     # para los archivos static
-      - ./django_app/media:/var/www/media     # para los archivos media
-      - ./django_app/media/fotos:/var/www/media/fotos     # para los archivos media
-    depends_on:
-      - app_django
+volumes:
+  .:

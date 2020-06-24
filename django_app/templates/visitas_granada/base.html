@@ -10,13 +10,15 @@
     <meta name="author" content="Ángel Valera Motos">
     <!-- --------------------------------------------------------------------------- -->
 
+    <link rel="shortcut icon" href="{% static '/images/favicon.png' %}" />
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{% static "css/shop-homepage.css" %}">
-    <link rel="stylesheet" href="{% static "css/style.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "css/dark-mode.css" %}">
+    <link rel="stylesheet" href="{% static 'css/shop-homepage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dark-mode.css' %}">
     <!-- --------------------------------------------------------------------------- -->
 
     <!-- Optional JavaScript -->
@@ -25,10 +27,10 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.35.3/js/bootstrap-dialog.min.js"></script>
     <!-- Libreria Leaflet para maps-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
@@ -37,7 +39,7 @@
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
         integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
         crossorigin=""></script>
-    <script src="{% static "js/funciones.js" %}"></script>
+    <script src="{% static 'js/funciones.js' %}"></script>
     <!-- --------------------------------------------------------------------------- -->
     <title>Visitas Granada</title>
 </head>
@@ -63,7 +65,8 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li>
-                        <span class="nav-link" id="tipolectura"><i id="dark_mode" class="fa fa-moon-o" aria-hidden="true"></i></span>
+                        <span class="nav-link" id="tipolectura"><i id="dark_mode" class="fa fa-moon-o"
+                                aria-hidden="true"></i></span>
                     </li>
                     {% if user.is_authenticated %}
                     {% if user.is_staff %}
@@ -89,7 +92,7 @@
     <!-- Header -->
     <div class="jumbotron jumbo_img">
         <div class="container">
-            <img src="{{ MEDIA_URL }}fotos/ugr.png" style="height: auto;" width="150px" height="150px">
+            <img src="{% static '/images/ugr.png' %}" style="height: auto;" width="150px" height="150px">
             <div class="row">
                 <div class="col-lg-2 linDatos font-weight-bold">
                     <p>{%block totalVisitas%}{%endblock%}</p>
@@ -121,15 +124,15 @@
     {% block footer %}
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Visitas Granada  2020</p>
+            <p class="m-0 text-center text-white">Copyright &copy; Visitas Granada 2020</p>
             <p class="m-0 text-center text-white">Ángel Valera Motos</p>
             <p class="m-0 text-center text-white">Máster de Ingeniería Informática</p>
-            <p class="m-0 text-center text-white">Sistemas Software Basados en Web</p>            
+            <p class="m-0 text-center text-white">Sistemas Software Basados en Web</p>
         </div><!-- /.container -->
     </footer> <!-- Footer -->
     {% endblock %}
     <!-- --------------------------------------------------------------------------- -->
-    <!-- Optional JavaScript -->    
+    <!-- Optional JavaScript -->
 </body>
 
 </html>

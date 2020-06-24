@@ -23,10 +23,12 @@ logger = logging.getLogger(__name__)
 # Leave the rest of the views (detail, results, vote) unchanged
 def index(request):
     lista_visitas = Visita.objects.order_by('-likes')[:6]
+    visitasCompletas = Visita.objects.order_by('nombre')
     num_comentarios = Comentario.objects.all().count()
     num_visitas = Visita.objects.all().count()
     template = loader.get_template('visitas_granada/index.html')
     context = {
+        'visitasCompletas': visitasCompletas,
         'lista_visitas': lista_visitas, 
         'num_comentarios': num_comentarios,
         'num_visitas' : num_visitas,
@@ -35,7 +37,7 @@ def index(request):
 
 
 def detalle_visita(request, visita_id): 
-    lista_visitas = Visita.objects.order_by('nombre')
+    visitasCompletas = Visita.objects.order_by('nombre')
     num_comentarios = Comentario.objects.all().count()
     num_visitas = Visita.objects.all().count()
     try:
@@ -60,7 +62,7 @@ def detalle_visita(request, visita_id):
         lon = '-3.6021928'
     template = loader.get_template('visitas_granada/detalle_visita.html')
     context = {        
-        'lista_visitas': lista_visitas,
+        'visitasCompletas': visitasCompletas,
         'mi_visita': mi_visita, 
         'comentarios': comentarios,
         'num_comentarios': num_comentarios,
@@ -74,7 +76,7 @@ def detalle_visita(request, visita_id):
 @login_required
 @staff_member_required
 def add_visita(request): 
-    lista_visitas = Visita.objects.order_by('nombre')
+    visitasCompletas = Visita.objects.order_by('nombre')
     num_comentarios = Comentario.objects.all().count()
     num_visitas = Visita.objects.all().count()
     form = VisitaForm()
@@ -93,7 +95,7 @@ def add_visita(request):
         'form': form,
         'num_comentarios': num_comentarios,
         'num_visitas': num_visitas,
-        'lista_visitas': lista_visitas,
+        'visitasCompletas': visitasCompletas,
     }
     return HttpResponse(template.render(context, request))
 
@@ -101,7 +103,7 @@ def add_visita(request):
 @login_required
 @staff_member_required
 def edit_visita(request, visita_id):
-    lista_visitas = Visita.objects.order_by('nombre')
+    visitasCompletas = Visita.objects.order_by('nombre')
     num_comentarios = Comentario.objects.all().count()
     num_visitas = Visita.objects.all().count()    
     try:
@@ -129,7 +131,7 @@ def edit_visita(request, visita_id):
         'visit': visit,
         'num_comentarios': num_comentarios,
         'num_visitas': num_visitas,
-        'lista_visitas': lista_visitas,
+        'visitasCompletas': visitasCompletas,
     }
     return HttpResponse(template.render(context, request))
 

@@ -30,8 +30,8 @@
             </div>
         </div>
         <div class="list-group">
-            {% if lista_visitas %}
-            {% for visita in lista_visitas %}
+            {% if visitasCompletas %}
+            {% for visita in visitasCompletas %}
             <a href="{% url 'detalle' visita.id %}" class="list-group-item">{{ visita.nombre }}</a>
             {% endfor %}
             {% endif %}
@@ -53,7 +53,7 @@
                 <div class="row no-gutters">
                     <div class="col-md-5">
                         {% thumbnail mi_visita.foto "720x1024" as im %}
-                        <img src="{{ MEDIA_URL }}{{ im.name}}" class="card-img" alt="{{ im.name }}" width="250px"
+                        <img src="{{ MEDIA_URL }}{{ im.name }}" class="card-img" alt="{{ im.name }}" width="250px"
                             height="250px">
                         {% endthumbnail %}
                     </div>
@@ -84,7 +84,7 @@
                                 style="margin-right: 5px;" data_but="btn-xs">
                                 <i class='fa fa-thumbs-o-down'></i> No me gusta</button>
                             <button id="btn_Like" type="button" class="btn btn-secondary btn-sm float-right"
-                                style="margin-right: 5px;" data_but="btn-xs" >
+                                style="margin-right: 5px;" data_but="btn-xs">
                                 <i class='fa fa-thumbs-o-up'></i> Me gusta</button>
                         </div>
                     </div>
@@ -99,16 +99,16 @@
                         <h4 style="margin-top: 10px;" align="center">Ubicación</h4>
                     </div>
                 </div>
-            </div>            
+            </div>
             <div id="visita_card_mapa" class="card mb-3" style="width: 100%;">
                 <div class="row no-gutters">
-                    <div id="ubi_map" class="card-body" style="height: 300px;" >
-                    <!--Mapa-->    
-                    </div>                    
+                    <div id="ubi_map" class="card-body" style="height: 300px;">
+                        <!--Mapa-->
+                    </div>
                 </div>
             </div>
             <!------------------------------------------------------------------------------------------------->
-            <!--Comentarios la ubicación -->            
+            <!--Comentarios la ubicación -->
             {% if comentarios %}
             <div class="card mb-3" style="width: 100%; color: #fff;background-color: #52565e;">
                 <div class="row ">

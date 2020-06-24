@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '@&sij5nk^n^5m4rg@zvjgknm23w2vcmw=+7hbv#0$-i+^)^r49'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_ALLOW_ALL = True
@@ -129,13 +129,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 STATIC_URL = '/static/'
-STATIC_PATH = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = '/code/static/'
+#STATIC_PATH = os.path.join(BASE_DIR, 'static')
+#STATICFILES_DIRS = (
+#    STATIC_PATH,
+#)
 
-STATICFILES_DIRS = (
-    STATIC_PATH,
-)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = '/code/media/'
 
 # -----------------------
 # Para el debug toolbar en docker
