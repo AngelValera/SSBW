@@ -31,7 +31,7 @@ Si tenemos un bot de telegram y queremos que la aplicación de django nos envíe
 
 Para instalar la aplicación de React debemos ejecutar el siguiente comando:
 
-1.  `docker-compose up run app_react npm install`
+1.  `docker-compose run app_react npm install`
 
 1. `docker-compose up `
   
