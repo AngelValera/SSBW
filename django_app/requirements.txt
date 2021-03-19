@@ -1,4 +1,4 @@
-Django==3.0.7
+Django==3.1.6
 Pillow==7.1.0
 django-debug-toolbar==2.2
 pip==20.0.2
