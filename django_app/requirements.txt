@@ -1,7 +1,7 @@
 Django==3.1.6
 Pillow==8.1.1
 django-debug-toolbar==2.2
-pip==20.0.2
+pip==21.1
 sorl-thumbnail
 django-crispy-forms
 django-messages-to-bootstrap-notify==0.2.6
